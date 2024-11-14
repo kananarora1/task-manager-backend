@@ -41,7 +41,7 @@ exports.loginUser = async (req, res) => {
         }
         const validPassword = await bcrypt.compare(req.body.password, user.password);
         if (!validPassword) {
-            return res.status(400).json({
+            return res.status(200).json({
                 success: false,
                 message: "Invalid password."
             });
@@ -61,14 +61,5 @@ exports.loginUser = async (req, res) => {
         });
     }
 };
-
-exports.getAllUsers = async (req, res) => {
-    try {
-        const users = await User.find();
-        res.status(200).send(users);
-    } catch (error) {
-        res.status(500).json({ message: "Not able to fetch users " + error });
-    }
-}
 
 

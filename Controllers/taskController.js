@@ -9,7 +9,7 @@ exports.createTask = async (req, res) => {
         };
         const newTask = new Task(taskData); 
         await newTask.save(); 
-        res.send({
+        res.status(201).send({
             success: true,
             message: 'Task created',
             taskId: newTask._id, 
@@ -51,7 +51,7 @@ exports.getTaskById = async (req, res) => {
         if (!task) {
             return res.status(404).json({ message: "Task not found" });
         }
-        res.send(task);
+        res.status(200).send(task);
     } catch (error) {
         res.status(500).json({ message: "Not able to fetch task " + error });
     }
@@ -64,7 +64,7 @@ exports.updateTask = async (req, res) => {
         if (!task) {
             return res.status(404).json({ message: "Task not found" });
         }
-        res.send({
+        res.status(200).send({
             success: true,
             message: 'Task updated',
             taskId: task._id,
@@ -81,7 +81,7 @@ exports.deleteTask = async (req, res) => {
         if (!task) {
             return res.status(404).json({ message: "Task not found" });
         }
-        res.send({
+        res.status(200).send({
             success: true,
             message: 'Task deleted',
             taskId: task._id,

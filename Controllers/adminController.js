@@ -1,6 +1,7 @@
 const User = require('../Models/user');
 const Task = require('../Models/task');
 
+// Get all Users
 exports.getAllUsers = async (req, res) => {
     try {
         const users = await User.find();
@@ -10,6 +11,7 @@ exports.getAllUsers = async (req, res) => {
     }
 };
 
+// Delete a task by id
 exports.deleteTaskById = async (req, res) => {
     try {
         const { id } = req.params;

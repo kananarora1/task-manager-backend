@@ -5,7 +5,7 @@ const { getAllUsers, deleteTaskById } = require('../Controllers/adminController'
 
 /**
  * @swagger
- * /admin/users:
+ * /api/admin/users:
  *   get:
  *     summary: Get all users (Admin only)
  *     description: Retrieves a list of all users in the system.
@@ -14,12 +14,14 @@ const { getAllUsers, deleteTaskById } = require('../Controllers/adminController'
  *         description: A list of users.
  *       403:
  *         description: Access denied. Admins only.
+ *       500:
+ *        description: Server error.
  */
 router.get('/users', adminAuth, getAllUsers);
 
 /** 
 * @swagger
-* /admin/tasks/{id}:
+* /api/admin/tasks/{id}:
 *   delete:
 *     summary: Delete a task by ID (Admin only)
 *     description: Deletes a specific task by its ID.
@@ -37,6 +39,8 @@ router.get('/users', adminAuth, getAllUsers);
 *         description: Task not found.
 *       403:
 *         description: Access denied. Admins only.
+*       500:
+*         description: Server error.
 */
 
 router.delete('/tasks/:id', adminAuth, deleteTaskById);

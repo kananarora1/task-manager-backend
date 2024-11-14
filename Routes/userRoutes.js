@@ -67,7 +67,7 @@ router.post('/register', registerUser);
  *               - email
  *               - password
  *     responses:
- *       400:
+ *       200:
  *         description: Login successful, returns a JWT token
  *         content:
  *           application/json:
@@ -83,39 +83,5 @@ router.post('/register', registerUser);
  *         description: Internal server error
  */
 router.post('/login', loginUser);
-
-/**
- * @swagger
- * /api/users:
- *   get:
- *     summary: Get all users
- *     description: Fetches a list of all users in the system. Requires admin privileges.
- *     operationId: getAllUsers
- *     responses:
- *       200:
- *         description: A list of users
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   _id:
- *                     type: string
- *                     example: "618f1f1f1f1f1f1f1f1f1f1f"
- *                   name:
- *                     type: string
- *                     example: "John Doe"
- *                   email:
- *                     type: string
- *                     example: "john@example.com"
- *                   role:
- *                     type: string
- *                     example: "user"
- *       500:
- *         description: Internal server error
- */
-router.get('/', getAllUsers);
 
 module.exports = router;

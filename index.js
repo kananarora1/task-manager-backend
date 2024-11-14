@@ -34,4 +34,4 @@ app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
 });
 
-app.use(`/${process.env.swagger_endpoint}`, swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+app.use('/Task-Manager/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));

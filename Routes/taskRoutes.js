@@ -35,8 +35,6 @@ const authenticateUser  = require('../Middlewares/auth');
  *     responses:
  *       201:
  *         description: Task created successfully
- *       400:
- *         description: Bad request (invalid input)
  *       500:
  *         description: Internal server error
  */
@@ -95,7 +93,7 @@ router.post('/create', authenticateUser, createTask);
  *         description: Server error
  */
 
-router.get('/', getAllTasks);
+router.get('/', authenticateUser, getAllTasks);
 
 /**
  * @swagger
@@ -139,7 +137,7 @@ router.get('/', getAllTasks);
  *       500:
  *         description: Internal server error
  */
-router.get('/:id', getTaskById);
+router.get('/:id', authenticateUser, getTaskById);
 
 /**
  * @swagger
@@ -180,14 +178,12 @@ router.get('/:id', getTaskById);
  *     responses:
  *       200:
  *         description: Task updated successfully
- *       400:
- *         description: Bad request (invalid input)
  *       404:
  *         description: Task not found
  *       500:
  *         description: Internal server error
  */
-router.put('/:id', updateTask);
+router.put('/:id', authenticateUser, updateTask);
 
 /**
  * @swagger
@@ -211,6 +207,6 @@ router.put('/:id', updateTask);
  *       500:
  *         description: Internal server error
  */
-router.delete('/:id', deleteTask);
+router.delete('/:id', authenticateUser, deleteTask);
 
 module.exports = router;
