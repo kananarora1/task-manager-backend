@@ -47,7 +47,7 @@ exports.loginUser = async (req, res) => {
             });
         }
         
-        const token = jwt.sign({ userId: user._id }, process.env.secret_key_jwt, { expiresIn: '7d' });
+        const token = jwt.sign({ _id: user._id, role: user.role }, process.env.secret_key_jwt, { expiresIn: '7d' });
         res.send({
             success: true,
             message: "You've successfully logged in!",

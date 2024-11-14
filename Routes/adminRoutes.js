@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const adminMiddle = require('../Middlewares/adminAuth');
+const adminAuth = require('../Middlewares/adminAuth');
 const { getAllUsers, deleteTaskById } = require('../Controllers/adminController');
 
 /**
@@ -15,7 +15,7 @@ const { getAllUsers, deleteTaskById } = require('../Controllers/adminController'
  *       403:
  *         description: Access denied. Admins only.
  */
-router.get('/users', adminMiddle, getAllUsers);
+router.get('/users', adminAuth, getAllUsers);
 
 /** 
 * @swagger
@@ -39,6 +39,6 @@ router.get('/users', adminMiddle, getAllUsers);
 *         description: Access denied. Admins only.
 */
 
-router.delete('/tasks/:id', adminMiddle, deleteTaskById);
+router.delete('/tasks/:id', adminAuth, deleteTaskById);
 
 module.exports = router;

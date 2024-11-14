@@ -46,37 +46,55 @@ router.post('/create', authenticateUser, createTask);
  * @swagger
  * /api/tasks:
  *   get:
- *     summary: Get all tasks
- *     description: Fetches a list of all tasks.
- *     operationId: getAllTasks
+ *     summary: Get a list of tasks with optional sorting and pagination
+ *     description: Fetches tasks with options for sorting by fields like dueDate or priority, and pagination.
+ *     parameters:
+ *       - in: query
+ *         name: sortBy
+ *         schema:
+ *           type: string
+ *           enum: [dueDate, priority]
+ *         description: The field to sort tasks by (e.g., dueDate or priority).
+ *       - in: query
+ *         name: order
+ *         schema:
+ *           type: string
+ *           enum: [asc, desc]
+ *         description: The sort order, ascending (asc) or descending (desc).
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           default: 1
+ *         description: Page number for pagination.
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           default: 10
+ *         description: Number of tasks per page.
  *     responses:
  *       200:
- *         description: A list of tasks
+ *         description: A list of tasks with sorting and pagination
  *         content:
  *           application/json:
  *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   _id:
- *                     type: string
- *                   title:
- *                     type: string
- *                   description:
- *                     type: string
- *                   status:
- *                     type: string
- *                   priority:
- *                     type: string
- *                   dueDate:
- *                     type: string
- *                     format: date
- *                   userId:
- *                     type: string
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                 tasks:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Task'
+ *                 totalPages:
+ *                   type: integer
+ *                 currentPage:
+ *                   type: integer
  *       500:
- *         description: Internal server error
+ *         description: Server error
  */
+
 router.get('/', getAllTasks);
 
 /**
