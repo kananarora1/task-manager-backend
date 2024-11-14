@@ -7,7 +7,7 @@ const { registerUser, loginUser, getAllUsers } = require('../Controllers/userCon
  * /api/users/register:
  *   post:
  *     summary: Register a new user
- *     description: Registers a new user by providing name, password, and other details.
+ *     description: Registers a new user by providing name, email, password, and role.
  *     operationId: registerUser
  *     requestBody:
  *       required: true
@@ -18,13 +18,17 @@ const { registerUser, loginUser, getAllUsers } = require('../Controllers/userCon
  *             properties:
  *               name:
  *                 type: string
+ *                 example: "John Doe"
  *               email:
  *                 type: string
+ *                 example: "john@example.com"
  *               password:
  *                 type: string
+ *                 example: "password123"
  *               role:
  *                 type: string
- *                 enum: [admin, user]
+ *                 enum: [user, admin]
+ *                 example: "user"
  *             required:
  *               - name
  *               - email
@@ -53,15 +57,17 @@ router.post('/register', registerUser);
  *           schema:
  *             type: object
  *             properties:
- *               username:
+ *               email:
  *                 type: string
+ *                 example: "john@example.com"
  *               password:
  *                 type: string
+ *                 example: "password123"
  *             required:
- *               - username
+ *               - email
  *               - password
  *     responses:
- *       200:
+ *       400:
  *         description: Login successful, returns a JWT token
  *         content:
  *           application/json:
@@ -70,8 +76,9 @@ router.post('/register', registerUser);
  *               properties:
  *                 token:
  *                   type: string
- *       400:
- *         description: Invalid username or password
+ *                   example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+ *       404:
+ *         description: Invalid email or password
  *       500:
  *         description: Internal server error
  */
@@ -96,14 +103,16 @@ router.post('/login', loginUser);
  *                 properties:
  *                   _id:
  *                     type: string
- *                   username:
+ *                     example: "618f1f1f1f1f1f1f1f1f1f1f"
+ *                   name:
  *                     type: string
+ *                     example: "John Doe"
  *                   email:
  *                     type: string
+ *                     example: "john@example.com"
  *                   role:
  *                     type: string
- *       403:
- *         description: Unauthorized access (admin required)
+ *                     example: "user"
  *       500:
  *         description: Internal server error
  */

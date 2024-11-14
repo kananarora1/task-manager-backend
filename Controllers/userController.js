@@ -65,7 +65,7 @@ exports.loginUser = async (req, res) => {
 exports.getAllUsers = async (req, res) => {
     try {
         const users = await User.find();
-        res.send(users);
+        res.status(200).send(users);
     } catch (error) {
         res.status(500).json({ message: "Not able to fetch users " + error });
     }
